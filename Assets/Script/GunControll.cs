@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class GunControll : MonoBehaviour
 {
-    public Gun currentGun; //ÇöÀç ÀåÂøµÈ ÃÑ±â
+    public Gun currentGun; //Gun ï¿½ï¿½Å©ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
     public float currentFireRate;
+    public bool currentReload = false;
     public AudioSource audioSource;
     void Start()
     {
@@ -14,13 +15,14 @@ public class GunControll : MonoBehaviour
 
     void Update()
     {
-        GunFireRateCalc();
+        GunFireRateformula(); //ï¿½Ñ±ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½ï¿½ï¿½
         TryFire();
+        TryReload();
     }
-    private void GunFireRateCalc()
+    private void GunFireRateformula()
     {
         if (currentFireRate > 0)
-            currentFireRate -= Time.deltaTime; //1ÃÊ´ç 1¾¿ °¨¼Ò
+            currentFireRate -= Time.deltaTime; //1ï¿½Ê´ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
     private void TryFire()
@@ -30,19 +32,26 @@ public class GunControll : MonoBehaviour
             Fire();
         }
     }
-    private void Fire()
+    private void Fire() // ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½
     {
         currentFireRate = currentGun.fireRate;
         Shoot();
     }
     
-    private void Shoot()
+    private void Shoot() // ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½
     {
         PlaySE(currentGun.fire_Sound);
         currentGun.muzzleFlash.Play();
-        Debug.Log("ÃÑ¾Ë ¹ß»çÇÔ");
+        Debug.Log("ï¿½Ñ¾ï¿½ ï¿½ß»ï¿½ï¿½ï¿½");
     }
 
+    private void TryReload()
+    {
+        if (Input.GetKeyDown(KeyCode.R) && currentReload && currentGun.currentBulletCount < currentGun.reloadBulletCount)
+        {
+            // fire, shoot ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Û¼ï¿½
+        }
+    }
     private void PlaySE(AudioClip _clip)
     {
         audioSource.clip = _clip;
