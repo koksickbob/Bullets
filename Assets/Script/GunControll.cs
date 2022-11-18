@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GunControll : MonoBehaviour
 {
-    public GunControll currentGun; //ÇöÀç ÀåÂøµÈ ÃÑ±â
+    public Gun currentGun; //ÇöÀç ÀåÂøµÈ ÃÑ±â
     public float currentFireRate;
     public AudioSource audioSource;
     void Start()
