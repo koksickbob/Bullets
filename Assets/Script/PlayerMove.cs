@@ -43,6 +43,8 @@ public class PlayerMove : MonoBehaviour
         originPosY = Cam.transform.localPosition.y;
         applyCrouchPosY = originPosY;
 
+        theGunControll = FineObjectOfType<GunControll>();
+
     }
 
     void Update()
@@ -97,6 +99,8 @@ public class PlayerMove : MonoBehaviour
     {
         if (isCrouch)
             Crouch();
+
+        theGunControll.CancelFineSight();
 
         isRun = true;
         applySpeed = runSpeed;
